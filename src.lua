@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/WetCheezit/Bracket-V2/main/src.lua"))()
-_G.Window, MainGUI = Library:CreateWindow("YVNG NENNO")
+_G.Window, MainGUI = Library:CreateWindow("PUSSYDESTROYER 3000")
 
 _G.WebhookLink = _G.WebhookLink or 0
 local notifier = false
@@ -10,7 +10,7 @@ local Groupbox1 = Tab1:CreateGroupbox("funcs", "Left")
 
 local ExampleToggle2 = Groupbox1:CreateToggle("fruit farm", function(state)
    print(state)
-   _G.Toggle = state
+   _G.Toggle1 = state
 end)
 
 local function webhookSend()
@@ -39,7 +39,7 @@ local toggleGui =  Groupbox1:CreateToggle("Close Gui", function(state)
 end)
 
 local keybind1 = toggleGui:CreateKeyBind("NONE", function(state)
-    game.CoreGui['YVNG NENNO'].Enabled = not game.CoreGui['YVNG NENNO'].Enabled
+    game.CoreGui["PUSSYDESTROYER 3000"].Enabled = not game.CoreGui["PUSSYDESTROYER 3000"].Enabled
 end)
 
 local toggleNotifier = Groupbox1:CreateToggle("fruit notifier", function(state)
@@ -119,7 +119,7 @@ end
 Teleport()
 end)
 
-_G.Toggle = false
+_G.Toggle1 = false
 print('toggle')
 
 local function fireproximityprompt(Obj, Amount, Skip)
@@ -177,7 +177,7 @@ workspace.Terrain.World.TargetFilter.Map.DescendantAdded:Connect(function(part)
         if whNotifier == true then
             webhookSend()
         end
-        if not _G.Toggle then return end
+        if not _G.Toggle1 then return end
         print('DETECTED A MODEL, RENAMING')
         part.Name = 'FRUIT MODEL'
         magic(part)
