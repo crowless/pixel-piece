@@ -1,6 +1,10 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/WetCheezit/Bracket-V2/main/src.lua"))()
 _G.Window, MainGUI = Library:CreateWindow("YVNG NENNO")
 
+_G.WebhookLink = _G.WebhookLink or 0
+local notifier = false
+local whNotifier = false
+
 local Tab1 = _G.Window:CreateTab("main")
 local Groupbox1 = Tab1:CreateGroupbox("funcs", "Left")
 
@@ -9,6 +13,29 @@ local ExampleToggle2 = Groupbox1:CreateToggle("fruit farm", function(state)
    _G.Toggul = state
 end)
 
+hi:Play()
+
+local function webhookSend()
+    if _G.WebhookLink == 0 then
+        return warn('WEBHOOK LINK NOT ENTERED')
+    end
+    local url = _G.WebhookLink
+    local data = {
+    ["content"] = 'DF NOTIFIER: FRUIT SPAWNED CHECK THE GAME DAWG',
+    }
+    local newdata = game:GetService("HttpService"):JSONEncode(data)
+    local headers = {
+    ["content-type"] = "application/json"
+    }
+    request = http_request or request or HttpPost or syn.request
+    local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+    request(abcdef)
+end
+
+local whtoggle = Groupbox1:CreateToggle("Webhook Notifier", function(state)
+    whNotifier = state
+ end)
+
 local toggleGui =  Groupbox1:CreateToggle("Close Gui", function(state)
    print(state)
 end)
@@ -16,6 +43,10 @@ end)
 local keybind1 = toggleGui:CreateKeyBind("NONE", function(state)
     game.CoreGui['YVNG NENNO'].Enabled = not game.CoreGui['YVNG NENNO'].Enabled
 end)
+
+local toggleNotifier = Groupbox1:CreateToggle("fruit notifier", function(state)
+    notifier = state
+ end)
 
 local ExampleButton = Groupbox1:CreateButton("exclusive serverhop", function()
     print("Pressed")
@@ -126,9 +157,29 @@ local function magic(model)
 end
 
 workspace.Terrain.World.TargetFilter.Map.DescendantAdded:Connect(function(part)
-    if not _G.Toggul then return end
     print(part:GetFullName())
     if part:IsA('Model') then
+        --here
+        if notifier == true then
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "NOTIFIER"; -- the title (ofc)
+                Text = "FRUIT SPAWNED, TURN ON AUTOFARM"; -- what the text says (ofc)
+                Icon = "rbxassetid://5951358406"; -- the image if u want. 
+                Duration = 5; -- how long the notification should in secounds
+            })
+            local hi = Instance.new("Sound")
+            hi.Name = "Sound"
+            hi.SoundId = "http://www.roblox.com/asset/?id=6646751775"
+            hi.Volume = 2
+            hi.Looped = false
+            hi.archivable = false
+            hi.Parent = game.Workspace
+            hi:Play()
+        end
+        if whNotifier == true then
+            webhookSend()
+        end
+        if not _G.Toggul then return end
         print('DETECTED A MODEL, RENAMING')
         part.Name = 'FRUIT MODEL'
         magic(part)
