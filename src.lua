@@ -11,9 +11,7 @@ local Groupbox1 = Tab1:CreateGroupbox("funcs", "Left")
 local ExampleToggle2 = Groupbox1:CreateToggle("fruit farm", function(state)
    print(state)
    _G.Toggul = state
-end)
-
-hi:Play()
+end
 
 local function webhookSend()
     if _G.WebhookLink == 0 then
