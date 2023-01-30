@@ -10,7 +10,7 @@ local Groupbox1 = Tab1:CreateGroupbox("funcs", "Left")
 
 local ExampleToggle2 = Groupbox1:CreateToggle("fruit farm", function(state)
    print(state)
-   _G.Toggul = state
+   _G.Toggle = state
 end)
 
 local function webhookSend()
@@ -48,7 +48,7 @@ local toggleNotifier = Groupbox1:CreateToggle("fruit notifier", function(state)
 
 local ExampleButton55 = Groupbox1:CreateButton("tp to a fruit (if any)", function()
     for i,v in next,workspace.Terrain.World.TargetFilter.Map:GetChildren() do
-        if v:IsA('Model') and v.Name == '' then
+        if (v:IsA('Model') and v.Name == '') or (v:IsA('Model') and v.Name == 'FRUIT MODEL') then
             repeat wait() until v.PrimaryPart~=nil
             local ts = game:GetService('TweenService')
             local dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.p-v.PrimaryPart.CFrame.p).Magnitude/300
@@ -160,7 +160,7 @@ end
 Teleport()
 end)
 
-_G.Toggul = false
+_G.Toggle = false
 print('toggle')
 
 local function fireproximityprompt(Obj, Amount, Skip)
@@ -221,7 +221,7 @@ workspace.Terrain.World.TargetFilter.Map.DescendantAdded:Connect(function(part)
         if whNotifier == true then
             webhookSend()
         end
-        if not _G.Toggul then return end
+        if not _G.Toggle then return end
         print('DETECTED A MODEL, RENAMING')
         part.Name = 'FRUIT MODEL'
         magic(part)
