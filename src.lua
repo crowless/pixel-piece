@@ -13,8 +13,6 @@ local ExampleToggle2 = Groupbox1:CreateToggle("fruit farm", function(state)
    _G.Toggul = state
 end)
 
-hi:Play()
-
 local function webhookSend()
     if _G.WebhookLink == 0 then
         return warn('WEBHOOK LINK NOT ENTERED')
