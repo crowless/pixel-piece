@@ -53,8 +53,8 @@ local ExampleButton55 = Groupbox1:CreateButton("tp to a fruit (if any)", functio
         if v:IsA('Model') and v.Name == '' then
             repeat wait() until v.PrimaryPart~=nil
             local ts = game:GetService('TweenService')
-            local dist = (game.Players.LocalPlayer.Character.HumanoidrootPart.CFrame.p-v.PrimaryPart.CFrame.p).Magnitude/300
-            local t = ts:Create(game.Players.LocalPlayer.Character.HumanoidrootPart,TweenInfo.new(dist,Enum.EasingStyle.Linear),{CFrame = v.PrimaryPart.CFrame}):Play()
+            local dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.p-v.PrimaryPart.CFrame.p).Magnitude/300
+            local t = ts:Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(dist,Enum.EasingStyle.Linear),{CFrame = v.PrimaryPart.CFrame}):Play()
             t.Completed:Wait()
             task.wait(1)
             for _,g in next,v:GetDescendants() do
