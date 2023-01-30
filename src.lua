@@ -187,8 +187,8 @@ local function magic(model)
     local prompt
     repeat wait() until model.PrimaryPart~=nil
     local ts = game:GetService('TweenService')
-    local dist = (game.Players.LocalPlayer.Character.HumanoidrootPart.CFrame.p-model.PrimaryPart.CFrame.p).Magnitude/300
-    local t = ts:Create(game.Players.LocalPlayer.Character.HumanoidrootPart,TweenInfo.new(dist,Enum.EasingStyle.Linear),{CFrame = model.PrimaryPart.CFrame}):Play()
+    local dist = (game.Players.LocalPlayer.Character.HumanoiRootPart.CFrame.p-model.PrimaryPart.CFrame.p).Magnitude/300
+    local t = ts:Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(dist,Enum.EasingStyle.Linear),{CFrame = model.PrimaryPart.CFrame}):Play()
     t.Completed:Wait()
     task.wait(1)
     for i,v in next,model:GetDescendants() do
