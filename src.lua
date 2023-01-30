@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/WetCheezit/Bracket-V2/main/src.lua"))()
-_G.Window, MainGUI = Library:CreateWindow("PUSSYDESTROYER 3000")
+_G.Window, MainGUI = Library:CreateWindow("YVNG NENNO")
 
 _G.WebhookLink = _G.WebhookLink or 0
 local notifier = false
@@ -10,8 +10,10 @@ local Groupbox1 = Tab1:CreateGroupbox("funcs", "Left")
 
 local ExampleToggle2 = Groupbox1:CreateToggle("fruit farm", function(state)
    print(state)
-   _G.Toggle1 = state
+   _G.Toggul = state
 end)
+
+hi:Play()
 
 local function webhookSend()
     if _G.WebhookLink == 0 then
@@ -39,12 +41,30 @@ local toggleGui =  Groupbox1:CreateToggle("Close Gui", function(state)
 end)
 
 local keybind1 = toggleGui:CreateKeyBind("NONE", function(state)
-    game.CoreGui["PUSSYDESTROYER 3000"].Enabled = not game.CoreGui["PUSSYDESTROYER 3000"].Enabled
+    game.CoreGui['YVNG NENNO'].Enabled = not game.CoreGui['YVNG NENNO'].Enabled
 end)
 
 local toggleNotifier = Groupbox1:CreateToggle("fruit notifier", function(state)
     notifier = state
  end)
+
+local ExampleButton55 = Groupbox1:CreateButton("tp to a fruit (if any)", function()
+    for i,v in next,workspace.Terrain.World.TargetFilter.Map:GetChildren() do
+        if v:IsA('Model') and v.Name == '' then
+            repeat wait() until v.PrimaryPart~=nil
+            local ts = game:GetService('TweenService')
+            local dist = (game.Players.LocalPlayer.Character.HumanoidrootPart.CFrame.p-v.PrimaryPart.CFrame.p).Magnitude/300
+            local t = ts:Create(game.Players.LocalPlayer.Character.HumanoidrootPart,TweenInfo.new(dist,Enum.EasingStyle.Linear),{CFrame = v.PrimaryPart.CFrame}):Play()
+            t.Completed:Wait()
+            task.wait(1)
+            for _,g in next,v:GetDescendants() do
+                if v:IsA('ProximityPrompt') then
+                    fireproximityprompt(g,1,true)
+                end
+            end
+        end
+    end
+end)
 
 local ExampleButton = Groupbox1:CreateButton("exclusive serverhop", function()
     print("Pressed")
@@ -60,6 +80,29 @@ if not File then
     table.insert(AllIDs, actualHour)
     writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
 end
+
+spawn(function()
+    repeat
+        wait()
+    until game:IsLoaded()
+    wait()
+    
+    if getconnections then
+        for _, v in next, getconnections(game:GetService("Players").LocalPlayer.Idled) do
+            v:Disable()
+        end
+    end
+    
+    if not getconnections then
+        game:GetService("Players").LocalPlayer.Idled:connect(
+            function()
+                game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+            end
+        )
+        print("poopy exploit")
+    end
+end)
+
 function TPReturner()
     local Site;
     if foundAnything == "" then
@@ -119,7 +162,7 @@ end
 Teleport()
 end)
 
-_G.Toggle1 = false
+_G.Toggul = false
 print('toggle')
 
 local function fireproximityprompt(Obj, Amount, Skip)
@@ -145,7 +188,10 @@ local function magic(model)
     print('modelname '..model.Name)
     local prompt
     repeat wait() until model.PrimaryPart~=nil
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(model.PrimaryPart.Position)
+    local ts = game:GetService('TweenService')
+    local dist = (game.Players.LocalPlayer.Character.HumanoidrootPart.CFrame.p-model.PrimaryPart.CFrame.p).Magnitude/300
+    local t = ts:Create(game.Players.LocalPlayer.Character.HumanoidrootPart,TweenInfo.new(dist,Enum.EasingStyle.Linear),{CFrame = model.PrimaryPart.CFrame}):Play()
+    t.Completed:Wait()
     task.wait(1)
     for i,v in next,model:GetDescendants() do
         if v:IsA('ProximityPrompt') then
@@ -177,7 +223,7 @@ workspace.Terrain.World.TargetFilter.Map.DescendantAdded:Connect(function(part)
         if whNotifier == true then
             webhookSend()
         end
-        if not _G.Toggle1 then return end
+        if not _G.Toggul then return end
         print('DETECTED A MODEL, RENAMING')
         part.Name = 'FRUIT MODEL'
         magic(part)
